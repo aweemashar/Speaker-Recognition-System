@@ -1,0 +1,29 @@
+from pydub import AudioSegment
+import os
+
+def audio_Format_Conversion(dir):
+
+  file_names = [f for f in listdir(dir)]
+  for file_name in file_names:
+    absolute_path = dir + file_name
+    filename, file_extension = os.path.splitext(absolute_path)
+
+    if(file_extension == '.wav'):
+      #do nothing
+    else:
+      AudioSegment.from_file(absolute_path).export(absolute_path, format="wav")
+ //////////////////////////////////////////////////////////////////     
+      
+from scipy.signal import butter, lfilter
+
+# input: numpy array of audio data
+
+def butter_filter(data,lowcut,highcut,fs,order=5):
+    nyq = 0.5 * fs
+    low = lowcut / nyq
+    high = highcut / nyq
+    b, a = butter(order, [low, high], btype='band')
+    y = lfilter(b, a, data)
+    return y
+
+      
